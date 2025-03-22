@@ -1,6 +1,8 @@
 const { select } = require("@inquirer/prompts");
 const start = async () => {
+  // Inicia o menu de opções
   while (true) {
+    // Pergunta ao usuário qual operação deseja realizar
     const opcao = await select({
       message: "Menu >",
       choices: [
