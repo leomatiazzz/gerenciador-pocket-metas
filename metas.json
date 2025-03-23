@@ -1,0 +1,22 @@
+[
+  {
+    "value": "Tomar 2L de água por dia",
+    "checked": false
+  },
+  {
+    "value": "Andar por 30km todos os dias",
+    "checked": false
+  },
+  {
+    "value": "Fazer as compras do dia",
+    "checked": false
+  },
+  {
+    "value": "Praticar a guitarra",
+    "checked": false
+  },
+  {
+    "value": "Ler um livro por 1 hora todos os dias",
+    "checked": false
+  }
+]
