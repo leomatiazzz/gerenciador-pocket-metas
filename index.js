@@ -1,7 +1,7 @@
 const { select, input, checkbox } = require("@inquirer/prompts");
 const fs = require("fs").promises;
 
-let mensagem = "Bem-vindo ao App de Metas!";
+let mensagem = "Bem-vindo ao App Gerenciador de Metas!";
 
 let metas;
 
@@ -28,7 +28,11 @@ const cadastrarMeta = async () => {
     return;
   }
 
-  metas.push({ value: meta, checked: false });
+  metas.push({
+    value: meta,
+    checked: false,
+    createdAt: new Date().toISOString(),
+  });
 
   mensagem = "Meta cadastrada com sucesso!";
 };
@@ -42,7 +46,13 @@ const listarMetas = async () => {
   const respostas = await checkbox({
     message:
       "Use as setas para mudar de meta, o espaço para marcar/desmarcar, e o Enter para finalizar essa etapa.",
-    choices: [...metas],
+    choices: metas.map((meta) => ({
+      name: `${meta.value} (criada em ${new Date(
+        meta.createdAt
+      ).toLocaleString()})`,
+      value: meta.value,
+      checked: meta.checked,
+    })),
     instructions: false,
   });
 
@@ -64,6 +74,38 @@ const listarMetas = async () => {
   });
 
   mensagem = "Meta(s) marcada(s) como concluída(s)!";
+};
+
+const filtrarMetas = async () => {
+  if (metas.length === 0) {
+    mensagem = "Não existem metas!";
+    return;
+  }
+
+  const palavraChave = await input({
+    message: "Digite a palavra-chave para filtrar:",
+  });
+
+  const resultados = metas.filter((meta) =>
+    meta.value.toLowerCase().includes(palavraChave.toLowerCase())
+  );
+
+  if (resultados.length === 0) {
+    mensagem = "Nenhuma meta corresponde à palavra-chave!";
+    return;
+  }
+
+  await select({
+    message: `Metas contendo "${palavraChave}":`,
+    choices: resultados.map((meta) => ({
+      name: `${meta.value} (criada em ${new Date(
+        meta.createdAt
+      ).toLocaleString()})`,
+      value: meta.value,
+    })),
+  });
+
+  mensagem = `${resultados.length} meta(s) encontrada(s).`;
 };
 
 const metasRealizadas = async () => {
@@ -164,6 +206,10 @@ const start = async () => {
           value: "listar",
         },
         {
+          name: "Filtrar metas por palavra-chave",
+          value: "filtrar",
+        },
+        {
           name: "Metas realizadas",
           value: "realizadas",
         },
@@ -188,6 +234,9 @@ const start = async () => {
         break;
       case "listar":
         await listarMetas();
+        break;
+      case "filtrar":
+        await filtrarMetas();
         break;
       case "realizadas":
         await metasRealizadas();

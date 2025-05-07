@@ -1,22 +1,27 @@
 [
   {
-    "value": "Tomar 2L de água por dia",
-    "checked": false
+    "value": "Correr por 20km",
+    "checked": false,
+    "createdAt": "2025-05-07T22:20:50.792Z"
   },
   {
-    "value": "Andar por 30km todos os dias",
-    "checked": false
+    "value": "Passear com o cachorro",
+    "checked": false,
+    "createdAt": "2025-05-07T22:21:00.709Z"
   },
   {
-    "value": "Fazer as compras do dia",
-    "checked": false
+    "value": "Estudar node.js por 2 horas",
+    "checked": false,
+    "createdAt": "2025-05-07T22:21:15.928Z"
   },
   {
-    "value": "Praticar a guitarra",
-    "checked": false
+    "value": "Ir malhar",
+    "checked": false,
+    "createdAt": "2025-05-07T22:21:23.138Z"
   },
   {
-    "value": "Ler um livro por 1 hora todos os dias",
-    "checked": false
+    "value": "Ir até a padaria comprar pão",
+    "checked": false,
+    "createdAt": "2025-05-07T22:21:34.706Z"
   }
 ]
